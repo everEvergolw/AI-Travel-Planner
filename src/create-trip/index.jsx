@@ -1,8 +1,10 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { SelectBudgetOptions, SelectTraverlesList } from '@/constants/options';
+import { AI_PROMPT, SelectBudgetOptions, SelectTraverlesList } from '@/constants/options';
+import { chatSession } from '@/service/AIModal';
 import React, { useEffect, useState } from 'react'
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete'
+import { toast } from 'sonner';
 
 function CreateTrip() {
   const [place, setPlace] = useState();
@@ -27,13 +29,33 @@ function CreateTrip() {
   },[formData])
 
 
-  const OnGenerateTrip =() =>{
-    if(formData?.noOfDays>5)
-        {
+  const OnGenerateTrip = async() =>{ 
 
+
+
+    if(formData?.noOfDays>0 && !formData?.location  || !formData?.budget  || !formData?.traveler)
+        {       
+            
+            toast("Please fill all details!");
+            console.log("Please fill all details!"); 
             return;
         }
 
+
+        const FINAL_PROMPT = AI_PROMPT
+                            .replace('{location}',formData?.location?.label)
+                            .replace('{totalDays}',formData?.noOfDays)
+                            .replace('{traveler}',formData?.traveler) 
+                            .replace('{budget}',formData?.budget)
+                            .replace('{totalDays}',formData?.noOfDays)
+
+
+
+
+        console.log(FINAL_PROMPT); 
+
+        const result = await chatSession.sendMessage(FINAL_PROMPT);
+        console.log(result?.response?.text());
 
   }
 
@@ -153,10 +175,10 @@ function CreateTrip() {
                             {SelectTraverlesList.map((item,index) =>(
 
                                 <div key={index}
-                                     onClick={() => handleInputChange('traverler',item.people)  }
+                                     onClick={() => handleInputChange('traveler',item.people)  }
 
                                      className={`p-4 border cursor-pointer rounded-lg hover:shadow-lg 
-                                        ${formData?.traverler == item.people && 'shadow-lg border-black'}`}>                                    
+                                        ${formData?.traveler == item.people && 'shadow-lg border-black'}`}>                                    
                                         <h2 className='text-3xl'>
 
                                             {item.icon}
