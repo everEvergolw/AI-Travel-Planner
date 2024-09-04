@@ -20,14 +20,18 @@ import {
 import { FcGoogle } from "react-icons/fc";
 import { useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
-import { db } from '@/service/firebaseConfig';
+import { db } from '@/service/firebaseConfig';  
+
+import { useNavigate } from 'react-router-dom'; 
 
 function CreateTrip() {
     const [place, setPlace] = useState();
     const [formData, setFormData] = useState([]);
 
     const [openDialogg, setOpenDialog] = useState(false);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(false); 
+
+    const navigate = useNavigate(); 
 
 
     const handleInputChange = (name, value) => {
@@ -116,13 +120,14 @@ function CreateTrip() {
     }
 
     const SaveAiTrip = async (TripData) => {
+
         setLoading(true);
         const user = JSON.parse(localStorage.getItem('user'));
         const docId = Date.now().toString();
     
         try {
             await setDoc(doc(db, "AITrips", docId), {
-                useSelection: formData,
+                userSelection: formData,
                 tripData: JSON.parse(TripData),
                 userEmail: user?.email,
                 id: docId
@@ -137,6 +142,11 @@ function CreateTrip() {
         } finally {
             setLoading(false);
         }
+
+
+        navigate('/view-trip/' + docId);
+
+
     };
     
 
