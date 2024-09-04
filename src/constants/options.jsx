@@ -68,4 +68,38 @@ export const SelectBudgetOptions=[
 
 ]
 
-export const AI_PROMPT = "Generate Travel Plan for Location : {location} for {totalDays} Days for {traveler} with a {budget} budget, give me hotelsOptions list with HotelName, HotelAddress, Price, hotelImageUrl, geoCoordinates, Rating, Descriptions and suggest Itinerary with placeName, laceDetails, laceImageUrl, GeoCoordinates, ticketPricing, timeTravel each of the location for {totalDays} days with each day plan with best time in a day to visit in JSON format."
+export const AI_PROMPT1 = "Generate Travel Plan for Location : {location} for {totalDays} Days for {traveler} with a {budget} budget, give me otelsoptions list with HotelName, HotelAddress, Price, hotelImageUrl, geoCoordinates, Rating, Descriptions and suggest Itinerary with placeName, laceDetails, laceImageUrl, GeoCoordinates, ticketPricing, timeTravel each of the location for {totalDays} days with each day plan with best time in a day to visit in JSON format."
+
+
+
+export const AI_PROMPT = `
+Generate a detailed travel plan for the location: "{location}" for {totalDays} days for {traveler} with a {budget} budget. Please include:
+- A list of hotel options under 'hotelsOptions', each entry should include:
+  - 'HotelName'
+  - 'HotelAddress'
+  - 'Price'
+  - 'hotelImageUrl'
+  - 'geoCoordinates' (with 'latitude' and 'longitude')
+  - 'Rating'
+  - 'Descriptions'
+
+- A suggested itinerary , that lists 'Itinerary' for each day of the trip, details for each 'Day' should include:
+  - 'BestTime' to visit
+  - 'DayPlan', a list of places to visit each day with the following details:
+    - 'placeName'
+    - 'placeDetails'
+    - 'placeImageUrl'
+    - 'GeoCoordinates' (with 'latitude' and 'longitude')
+    - 'ticketPricing'
+    - 'timeTravel' between locations
+
+The output should be structured in JSON format and include:
+- 'userSelection' that captures:
+  - 'budget'
+  - 'location'
+  - 'noOfDays'
+  - 'traveler'
+
+
+Please ensure all details are clearly and accurately formatted in JSON format.
+`;
