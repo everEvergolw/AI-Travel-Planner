@@ -20,18 +20,18 @@ import {
 import { FcGoogle } from "react-icons/fc";
 import { useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
-import { db } from '@/service/firebaseConfig';  
+import { db } from '@/service/firebaseConfig';
 
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
 
 function CreateTrip() {
     const [place, setPlace] = useState();
     const [formData, setFormData] = useState([]);
 
     const [openDialogg, setOpenDialog] = useState(false);
-    const [loading, setLoading] = useState(false); 
+    const [loading, setLoading] = useState(false);
 
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
 
 
     const handleInputChange = (name, value) => {
@@ -124,7 +124,7 @@ function CreateTrip() {
         setLoading(true);
         const user = JSON.parse(localStorage.getItem('user'));
         const docId = Date.now().toString();
-    
+
         try {
             await setDoc(doc(db, "AITrips", docId), {
                 userSelection: formData,
@@ -136,7 +136,7 @@ function CreateTrip() {
             console.error("Failed to save trip:", error);
             // Log detailed error information
             if (error instanceof FirebaseError) {
-                console.error("Error code:", error.code); 
+                console.error("Error code:", error.code);
                 console.error("Error message:", error.message);
             }
         } finally {
@@ -148,7 +148,7 @@ function CreateTrip() {
 
 
     };
-    
+
 
 
 

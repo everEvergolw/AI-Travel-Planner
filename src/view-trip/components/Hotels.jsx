@@ -18,7 +18,7 @@ function Hotels({trip}) {
                 ))}
 
 
-        </div>
+        </div> 
 
     </div>
   )
