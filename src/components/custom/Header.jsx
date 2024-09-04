@@ -61,17 +61,20 @@ const GetUserProfile = (tokenInfo) => {
   return (
     <div className='p-3 shadow-sm flex justify-between items-center px-5'>
 
-
-            <img src='/logo.svg' onClick={()=>{
-                        }} />
-
+             <a href='/'>
+                <img src='/logo.svg'  />
+              </a>
             <div>
                 
                 {user?
                 <div className='flex items-center gap-3'> 
-                    <Button variant="outline" className="rounded-full">My Trips</Button> 
+                    <a href='/create-trip'>
+                       <Button variant="outline" className="rounded-full">+ Create Trip</Button> 
+                    </a>
+                    <a href='/my-trips'>
+                       <Button variant="outline" className="rounded-full">My Trips</Button> 
+                    </a>
 
-                    
                       <Popover>
                         <PopoverTrigger>
                           <img src={user?.picture} className='h-[35px] w-[35px] rounded-full'/> 

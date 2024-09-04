@@ -20,7 +20,7 @@ function Hero() {
 
                 <Link to={'/create-trip'}>
                 
-                     <Button>Get Stared, it's free</Button>
+                     <Button className="mt-">Get Stared, it's free</Button>
 
                 
                 </Link>
